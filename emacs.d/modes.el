@@ -3,29 +3,39 @@
 (add-hook 'after-init-hook 'global-company-mode)
 ;(helm-mode 1)
 
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(recentf-mode 1)
+(setq recentf-max-menu-items 200)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;(global-set-key (kbd "M-x") 'helm-M-x)
-;(global-set-key (kbd "C-x C-f") 'helm-find-files)
-;(global-set-key (kbd "C-s") 'helm-occur)
+;(setq ido-enable-flex-matching t)
+;(setq ido-everywhere t)
+;(ido-mode 1)
+
+;(ivy-mode 1)
+;(setq ivy-use-virtual-buffers t)
+;(setq enable-recursive-minibuffers t)
+;(global-set-key "\C-s" 'swiper)
+;(global-set-key (kbd "C-c C-r") 'ivy-resume)
+;(global-set-key (kbd "<f6>") 'ivy-resume)
+;(global-set-key (kbd "M-x") 'counsel-M-x)
+;(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;(global-set-key (kbd "<f1> l") 'counsel-find-library)
+;(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;(global-set-key (kbd "C-c g") 'counsel-git)
+;(global-set-key (kbd "C-c j") 'counsel-git-grep)
+;(global-set-key (kbd "C-c r") 'counsel-recentf)
+;(global-set-key (kbd "C-c k") 'counsel-ag)
+;(global-set-key (kbd "C-x l") 'counsel-locate)
+;(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "C-s") 'helm-occur)
 (global-flycheck-mode)
 
 (setq company-idle-delay 1)
@@ -97,3 +107,46 @@
 
 (eval-after-load 'haskell-mode
           '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
+
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;(setq ido-enable-flex-matching t)
+;(setq ido-everywhere t)
+;(ido-mode 1)
+
+;(global-set-key
+;     "\M-x"
+;     (lambda ()
+;       (interactive)
+;       (call-interactively
+;        (intern
+;         (ido-completing-read
+;          "M-x "
+;          (all-completions "" obarray 'commandp))))))
+
+(drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
+
+(require 'projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)

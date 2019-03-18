@@ -1,3 +1,7 @@
+;;; package --- ahoj ako sa mas
+
+
+
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -25,12 +29,16 @@
  '(custom-safe-themes
    (quote
     ("7f9dc0c7bc8e5b4a1b9904359ee449cac91fd89dde6aca7a45e4ed2e4985664c" default)))
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-tags-on-save t)
  '(package-selected-package
    (quote
     (tide jbeans-theme counsel-projectile helm-projectile projectile helm company-mode company which-key load-dir)))
  '(package-selected-packages
    (quote
-    (company-ghc haskell-mode clojure-mode merlin reason-mode ace-window flycheck-inline avy-flycheck projectile helm magit smex which-key tide load-dir jbeans-theme helm-projectile counsel-projectile company))))
+    (cargo ob-rust flycheck-rust color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized ag ivy-dired-history projectile-git-autofetch projectile-codesearch cider lsp-rust rust-mode fsharp-mode drag-stuff elein clojure-snippets clj-refactor 2048-game company-ghc haskell-mode clojure-mode merlin reason-mode ace-window flycheck-inline avy-flycheck projectile helm magit smex which-key tide load-dir jbeans-theme helm-projectile counsel-projectile company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -44,3 +52,5 @@
 
 (load "~/.emacs.d/visual")
 (load "~/.emacs.d/modes")
+
+(setq ghc-debug t)
