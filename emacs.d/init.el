@@ -1,5 +1,3 @@
-;;; package --- ahoj ako sa mas
-
 
 
 (require 'package)

@@ -34,6 +34,16 @@
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c p f") 'helm-projectile-find-file-dwim)
+(global-set-key (kbd "C-c p h") 'helm-projectile)
+
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+(exec-path-from-shell-initialize)
+(helm-mode 1)
+
+
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-s") 'helm-occur)
 (global-flycheck-mode)
