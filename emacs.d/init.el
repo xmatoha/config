@@ -51,4 +51,7 @@
 (load "~/.emacs.d/visual")
 (load "~/.emacs.d/modes")
 
+(load "~/.emacs.d/flycheck-inline")
+(load "~/.emacs.d/modes")
+
 (setq ghc-debug t)

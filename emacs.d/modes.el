@@ -48,6 +48,8 @@
 (global-set-key (kbd "C-s") 'helm-occur)
 (global-flycheck-mode)
 
+
+
 (setq company-idle-delay 1)
 (setq company-minimum-prefix-length 1)
 ;(setq company-selection-wrap-around t)
@@ -56,6 +58,13 @@
 
 (with-eval-after-load 'flycheck
   (flycheck-inline-mode))
+
+
+(eval-after-load 'flycheck '(flycheck-clojure-setup))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(eval-after-load 'flycheck
+  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
 (global-set-key (kbd "C-x o") 'ace-window)
 
